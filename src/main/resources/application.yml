@@ -8,3 +8,5 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+jwt:
+  key: +Bcm46nIkkA66SId22261lQFE0Gm0PvQ6Fqec3FVscg=
