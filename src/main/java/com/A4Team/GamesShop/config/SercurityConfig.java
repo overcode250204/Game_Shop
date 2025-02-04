@@ -23,7 +23,7 @@ public class SercurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> {
-                    request.requestMatchers("/login").permitAll();
+                    request.requestMatchers("/auth/login").permitAll();
                     request.anyRequest().authenticated();
                 })
                 .build();
