@@ -27,7 +27,6 @@ public class AuthenticationService {
 
 
     public BaseResponse<AuthDTO> login(@Valid LoginRequest request) {
-        System.out.println("Login request: ");
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new LoginException("Invalid email or password"));
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
