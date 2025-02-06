@@ -9,5 +9,10 @@ spring:
     hibernate:
       ddl-auto: none
 
+logging:
+  level:
+    org.springframework.web: DEBUG
+
 jwt:
   key: 48v2+wyPoUvM22gBDawqJXhe7C3FOVpp8PJlH4XOAcY=
+  tokenExpirationMs: 3600000
