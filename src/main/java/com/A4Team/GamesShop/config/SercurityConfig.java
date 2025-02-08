@@ -15,17 +15,25 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-public class SercurityConfig {
+public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, CorsConfigurationSource corsConfigurationSource) throws Exception {
         return http.csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(request -> {
-                    request.requestMatchers("/auth/login").permitAll();
-                    request.anyRequest().authenticated();
-                })
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers(
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-resources/**",
+                                "/webjars/**"
+                        ).permitAll()  // Cho phép truy cập Swagger
+                        .anyRequest().authenticated()  // Các request khác yêu cầu xác thực
+                )
+                .oauth2Login(auth -> auth.successHandler((request, response, authentication) -> {
+                    request.getRequestDispatcher("/auth/home").forward(request, response);
+                }))
                 .build();
     }
 
@@ -40,5 +48,4 @@ public class SercurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
 }
