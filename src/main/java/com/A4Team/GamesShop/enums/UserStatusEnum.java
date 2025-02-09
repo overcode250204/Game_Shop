@@ -14,4 +14,16 @@ public enum UserStatusEnum {
         this.value = value;
     }
 
+<<<<<<< HEAD
+    public static UserStatusEnum fromValue(int value) {
+        for (UserStatusEnum status : values()) {
+            if (status.getValue() == value) {
+                return status;
+            }
+        }
+        throw new IllegalArgumentException("Invalid UserStatusEnum value: " + value);
+    }
+
+=======
+>>>>>>> 58016aed108fb06f72f7badf23b02a5000cf0712
 }

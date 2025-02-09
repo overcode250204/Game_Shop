@@ -34,6 +34,22 @@ public class CustomSecurityFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
+<<<<<<< HEAD
+        if (path.startsWith("/swagger-ui") ||
+                path.startsWith("/v3/api-docs") ||
+                path.startsWith("/swagger-resources") ||
+                path.startsWith("/webjars")) {
+            filterChain.doFilter(request,response);
+            return;
+        }
+
+        if (path.startsWith("/auth/google/google-url") || path.startsWith("/auth/google/google-login") || path.startsWith("/auth/google/testToken")) {
+            filterChain.doFilter(request,response);
+            return;
+        }
+
+=======
+>>>>>>> 58016aed108fb06f72f7badf23b02a5000cf0712
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
