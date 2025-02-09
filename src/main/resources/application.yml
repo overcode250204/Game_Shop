@@ -16,3 +16,6 @@ logging:
 jwt:
   key: 48v2+wyPoUvM22gBDawqJXhe7C3FOVpp8PJlH4XOAcY=
   tokenExpirationMs: 3600000
+
+upload:
+  path: D:\ws-shopgame-01\Game_Shop\Game_Shop\src\data\images
