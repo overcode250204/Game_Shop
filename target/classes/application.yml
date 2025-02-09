@@ -16,3 +16,15 @@ logging:
 jwt:
   key: 48v2+wyPoUvM22gBDawqJXhe7C3FOVpp8PJlH4XOAcY=
   tokenExpirationMs: 3600000
+
+upload:
+  image-path: ${UPLOAD_IMAGE_PATH:src/data/images}
+  game-path: ${UPLOAD_GAME_PATH:src/data/games}
+  temp-path: ${UPLOAD_TEMP_PATH:src/data/temp}
+
+server:
+  port: 8080
+  url: ${SERVER_URL:http://localhost:8080}
+
+url:
+  authUrl: /api/auth/login-with-password

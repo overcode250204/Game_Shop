@@ -27,8 +27,8 @@ public class SercurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/auth/login-with-password").permitAll();
-                    auth.requestMatchers("/auth/user")
+                    auth.requestMatchers("/api/auth/**").permitAll();
+                    auth.requestMatchers("/api/user/me", "/api/files/avatar")
                             .hasAnyRole("USER", "ADMIN", "STAFF");
                     auth.anyRequest().authenticated();
                 })

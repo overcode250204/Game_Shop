@@ -14,4 +14,6 @@ public class UserAuthResponse {
     private String name;
     private String avatar;
     private UserRoleEnum role;
+
+
 }
