@@ -26,9 +26,11 @@ public class SercurityConfig {
         return http.csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(request -> {
-                    request.requestMatchers("/auth/login-with-password").permitAll();
-                    request.anyRequest().authenticated();
+                .authorizeHttpRequests(auth -> {
+                    auth.requestMatchers("/auth/login-with-password").permitAll();
+                    auth.requestMatchers("/auth/user")
+                            .hasAnyRole("USER", "ADMIN", "STAFF");
+                    auth.anyRequest().authenticated();
                 })
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
                 .build();

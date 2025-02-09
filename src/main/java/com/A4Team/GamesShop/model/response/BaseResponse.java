@@ -1,4 +1,4 @@
-package com.A4Team.GamesShop.response;
+package com.A4Team.GamesShop.model.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +18,8 @@ public class BaseResponse<T> {
         return new BaseResponse<>(HttpStatus.OK.value(), message, data, null);
     }
 
-    public static BaseResponse<?> error(HttpStatus status, String message, List<String> errors){
+    public static <T> BaseResponse<T> error(HttpStatus status, String message, List<String> errors) {
         return new BaseResponse<>(status.value(), message, null, errors);
     }
+
 }

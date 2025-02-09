@@ -1,5 +1,6 @@
 package com.A4Team.GamesShop.filter;
 
+import com.A4Team.GamesShop.model.response.UserAuthResponse;
 import com.A4Team.GamesShop.exception.JwtExceptionCustom;
 import com.A4Team.GamesShop.utils.JwtHelper;
 import jakarta.servlet.FilterChain;
@@ -7,6 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +17,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class CustomSecurityFilter extends OncePerRequestFilter {
@@ -33,10 +36,13 @@ public class CustomSecurityFilter extends OncePerRequestFilter {
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
             try{
-                String role = jwtHelper.getDataToken(token);
-                List<SimpleGrantedAuthority> authorityList = List.of(new SimpleGrantedAuthority(role));
+                UserAuthResponse user = jwtHelper.getDataToken(token);
+                String roleName = Optional.ofNullable(user.getRole())
+                        .map(Enum::name)
+                        .orElseThrow(() -> new JwtExceptionCustom("User role is missing", HttpStatus.UNAUTHORIZED));
+                List<SimpleGrantedAuthority> authorityList = List.of(new SimpleGrantedAuthority(roleName));
                 UsernamePasswordAuthenticationToken authenticationToken =
-                        new UsernamePasswordAuthenticationToken(null, null, authorityList);
+                        new UsernamePasswordAuthenticationToken(user, null, authorityList);
 
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }catch (JwtExceptionCustom e){

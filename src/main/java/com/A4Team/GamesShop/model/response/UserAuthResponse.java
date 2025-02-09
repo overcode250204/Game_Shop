@@ -1,4 +1,4 @@
-package com.A4Team.GamesShop.dto;
+package com.A4Team.GamesShop.model.response;
 
 import com.A4Team.GamesShop.enums.UserRoleEnum;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+public class UserAuthResponse {
     private int id;
     private String email;
     private String name;
