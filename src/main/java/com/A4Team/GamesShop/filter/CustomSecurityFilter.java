@@ -8,6 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,11 +25,12 @@ public class CustomSecurityFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtHelper jwtHelper;
-
+    @Value("${url.authUrl}")
+    private String authUrl;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String path = request.getServletPath();
-        if("/auth/login-with-password".equals(path)) {
+        if(authUrl.equals(path)) {
             filterChain.doFilter(request, response);
             return;
         }

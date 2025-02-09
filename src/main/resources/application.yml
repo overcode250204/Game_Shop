@@ -18,4 +18,13 @@ jwt:
   tokenExpirationMs: 3600000
 
 upload:
-  path: D:\ws-shopgame-01\Game_Shop\Game_Shop\src\data\images
+  image-path: ${UPLOAD_IMAGE_PATH:src/data/images}
+  game-path: ${UPLOAD_GAME_PATH:src/data/games}
+  temp-path: ${UPLOAD_TEMP_PATH:src/data/temp}
+
+server:
+  port: 8080
+  url: ${SERVER_URL:http://localhost:8080}
+
+url:
+  authUrl: /api/auth/login-with-password
