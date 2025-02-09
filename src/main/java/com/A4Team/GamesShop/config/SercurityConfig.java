@@ -27,6 +27,7 @@ public class SercurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> {
+<<<<<<< HEAD
                     auth.requestMatchers("/api/auth/**", "/auth/google/**").permitAll();
                     auth.requestMatchers("/api/user/me", "/api/files/avatar")
                             .hasAnyRole("USER", "ADMIN", "STAFF");
@@ -34,6 +35,11 @@ public class SercurityConfig {
                             "/v3/api-docs/**",
                             "/swagger-resources/**",
                             "/webjars/**").permitAll();
+=======
+                    auth.requestMatchers("/api/auth/**").permitAll();
+                    auth.requestMatchers("/api/user/me", "/api/files/avatar")
+                            .hasAnyRole("USER", "ADMIN", "STAFF");
+>>>>>>> 58016aed108fb06f72f7badf23b02a5000cf0712
                     auth.anyRequest().authenticated();
                 })
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)

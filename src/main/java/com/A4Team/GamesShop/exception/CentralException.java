@@ -4,7 +4,10 @@ import com.A4Team.GamesShop.model.response.BaseResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.ResponseStatus;
+=======
+>>>>>>> 58016aed108fb06f72f7badf23b02a5000cf0712
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
@@ -31,11 +34,14 @@ public class CentralException {
                 .body(BaseResponse.error(e.getStatus(), e.getMessage(), List.of("File upload failed")));
     }
 
+<<<<<<< HEAD
     @ExceptionHandler({GoogleAuthenticationException.class})
     @ResponseStatus
     public ResponseEntity<BaseResponse<?>> handleGoogleAuthenticationException(GoogleAuthenticationException e) {
         return ResponseEntity.status(e.getStatus()).body(BaseResponse.error(e.getStatus(), e.getMessage(), List.of("Google authentication error")));
     }
 
+=======
+>>>>>>> 58016aed108fb06f72f7badf23b02a5000cf0712
 
 }
